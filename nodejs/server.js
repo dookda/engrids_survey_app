@@ -7,10 +7,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // static files
-app.use(express.static('www'));
+app.use('/survey', express.static('www'));
 
 // api
-app.use('/', require('./service/api'));
+app.use('/survey', require('./service/api'));
 
 const port = 3000;
 app.listen(port, () => {

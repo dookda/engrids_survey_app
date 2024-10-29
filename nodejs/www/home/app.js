@@ -85,7 +85,7 @@ const greenIcon = L.icon({
 // get data from server
 var markerGroup = L.layerGroup().addTo(map);
 function getData() {
-    fetch('/api/getdata')
+    fetch('/survey/api/getdata')
         .then(response => response.json())
         .then(data => {
             removeMarker("marker-green");
@@ -145,7 +145,7 @@ document.getElementById('surveyForm').addEventListener('submit', function (event
     };
 
     // Send POST request using fetch
-    fetch('/api/insertdata', {
+    fetch('/survey/api/insertdata', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
