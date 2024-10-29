@@ -1,8 +1,12 @@
 body {
-    padding-top: 100px;
+    padding-top: 90px;
+
+    font-family: "Noto Sans Thai", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 #map {
-    height: 80vh;
+    height: 70vh;
     width: 100%;
 }
