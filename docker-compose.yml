@@ -1,7 +1,7 @@
 services:
   postgis:
     image: postgis/postgis
-    container_name: engrids_survey_postgis
+    container_name: survey_postgis
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -14,7 +14,7 @@ services:
 
   nodejs:
     image: node
-    container_name: engrids_survey_nodejs
+    container_name: survey_nodejs
     working_dir: /app/nodejs
     restart: always
     depends_on:
