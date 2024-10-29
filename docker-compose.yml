@@ -1,0 +1,28 @@
+services:
+  postgis:
+    image: postgis/postgis
+    container_name: engrids_survey_postgis
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      # - POSTGRES_DB=geodb
+    volumes:
+      - ./postgis/:/docker-entrypoint-initdb.d
+    ports:
+      - 5433:5432
+
+  nodejs:
+    image: node
+    container_name: engrids_survey_nodejs
+    working_dir: /app/nodejs
+    restart: always
+    depends_on:
+      - postgis
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./nodejs:/app/nodejs
+    ports:
+      - 3000:3000
+    command: bash -c "npm i && npm i -g nodemon  && nodemon server.js"
