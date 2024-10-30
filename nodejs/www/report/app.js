@@ -206,6 +206,16 @@ async function loadTableData() {
                 { data: 'lng' }
             ],
             scrollX: true,
+            destroy: true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Survey Data',
+                    text: 'ดาวโหลด Excel',
+                    className: 'custom-button'
+                }
+            ]
         });
 
         let filteredData = table.rows({ filter: 'applied' }).data().toArray();

@@ -42,3 +42,10 @@ body {
     border-color: none;
     box-shadow: 0 0 0 0.2rem rgba(251, 251, 251, 0.5);
 }
+
+.custom-button {
+    color: #000 !important;
+    /* Change font color to white */
+    background-color: #28a745;
+    /* Customize button background color if needed */
+}
