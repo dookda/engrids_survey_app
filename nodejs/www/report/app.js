@@ -45,16 +45,14 @@ const bingMaps = L.tileLayer('https://t.ssl.ak.tiles.virtualearth.net/tiles/r{q}
 });
 
 const basemaps = {
-    osm: osm,
-    Esri_WorldImagery: Esri_WorldImagery,
-    CartoDB_Positron: CartoDB_Positron,
-    roadMap: roadMap,
-    satelliteMap: satelliteMap,
-    terrainMap: terrainMap,
-    hybridMap: hybridMap.addTo(map),
-    Esri_WorldStreetMap: Esri_WorldStreetMap
+    "แผนที่ถนน OSM": osm,
+    "แผนที่ถนน CartoDB": CartoDB_Positron,
+    "แผนที่ถนน Gooele": roadMap,
+    "แผนที่จากดาวเทียม ESRI": Esri_WorldImagery,
+    "แผนที่จากดาวเทียม Google": satelliteMap.addTo(map),
+    "แผนที่จากดาวเทียม Google-ชื่อสถานที่": hybridMap,
+    "แผนที่ภูมิประเทศ": terrainMap,
 }
-
 
 var markerGroup = L.layerGroup().addTo(map);
 const overlay = {
