@@ -10,3 +10,13 @@ body {
     height: 70vh;
     width: 100%;
 }
+
+.noborder {
+    border: none;
+    padding: none;
+}
+
+.layout-horizontal .header-top {
+    background-color: #fff;
+    padding: 0.7rem .4rem;
+}
