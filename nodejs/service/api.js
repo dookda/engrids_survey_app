@@ -41,17 +41,42 @@ app.get('/api/getdata', async (req, res) => {
     try {
         const query = 'SELECT * FROM survey';
         const result = await pool.query(query);
-
         res.status(200).json({
-            message: 'Data retrieved successfully',
             data: result.rows
         });
     } catch (error) {
-        console.error('Error retrieving data', error);
         res.status(500).json({
             message: 'Error retrieving data',
             error: error.message
         });
+    }
+});
+
+app.delete('/api/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const query = 'DELETE FROM survey WHERE gid = $1';
+        await pool.query(query, [id]);
+        res.status(200).json({ message: 'Row deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting row', error: error.message });
+    }
+});
+
+app.put('/api/update/:id', async (req, res) => {
+    const { id } = req.params;
+    const { mncptname, moo, hno, lat, lng } = req.body;
+
+    try {
+        const query = `UPDATE survey 
+            SET mncptname = $1, moo = $2, hno = $3, lat = $4, lng = $5 
+            WHERE gid = $6`;
+        console.log(query);
+
+        await pool.query(query, [mncptname, moo, hno, lat, lng, id]);
+        res.status(200).json({ message: 'Row updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating row', error: error.message });
     }
 });
 

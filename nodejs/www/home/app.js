@@ -55,11 +55,11 @@ const basemaps = {
     Esri_WorldStreetMap: Esri_WorldStreetMap
 }
 
+var markerGroup = L.layerGroup().addTo(map);
 const overlay = {
-    // "ขอบเขตอำเภอ": amphoe_cm.addTo(map),
+    "ตำแหน่งบ้าน": markerGroup.addTo(map),
     // "ขอบเขตตำบล": tambon_cm.addTo(map)
 }
-
 L.control.layers(basemaps, overlay).addTo(map);
 
 var lc = L.control.locate({
@@ -82,8 +82,11 @@ const greenIcon = L.icon({
     popupAnchor: [0, -32]
 });
 
+function gotoPage(page) {
+    window.location.href = "./../" + page + "/index.html";
+}
+
 // get data from server
-var markerGroup = L.layerGroup().addTo(map);
 function getData() {
     fetch('/survey/api/getdata')
         .then(response => response.json())
