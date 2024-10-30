@@ -6,7 +6,7 @@ const pool = new Pool({
     user: 'postgres',       // replace with your PostgreSQL username
     host: 'postgis',            // or your DB server address
     database: 'housenumber',    // replace with your database name
-    password: '1234',    // replace with your PostgreSQL password
+    password: 'lgiasurveyapp1234',    // replace with your PostgreSQL password
     port: 5432,                   // default PostgreSQL port
 });
 
