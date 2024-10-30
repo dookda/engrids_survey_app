@@ -1,5 +1,5 @@
 body {
-    padding-top: 100px;
+    padding-top: 12vh;
 
     font-family: "Noto Sans Thai", serif;
     font-optical-sizing: auto;
@@ -7,7 +7,7 @@ body {
 }
 
 #map {
-    height: 75vh;
+    height: 70vh;
     width: 100%;
 }
 
