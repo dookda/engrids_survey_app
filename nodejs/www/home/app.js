@@ -68,7 +68,7 @@ L.geoJSON(bm_bound, {
         // border color only
         return {
             color: "yellow",
-            weight: 1,
+            weight: 2,
             fillOpacity: 0.0,
             dashArray: '5, 5'
 
