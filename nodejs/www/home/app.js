@@ -1,4 +1,4 @@
-var map = L.map('map').setView([18.551570505767558, 99.0703012946973], 13);
+var map = L.map('map').setView([18.551570505767558, 99.0703012946973], 15);
 
 const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -139,7 +139,7 @@ function onclick(e) {
     document.getElementById('lng').value = e.latlng.lng;
 }
 
-lc.start();
+// lc.start();
 map.on("click", onclick);
 getData();
 
