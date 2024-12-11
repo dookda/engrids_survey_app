@@ -39,18 +39,12 @@ const hybridMap = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z
     attribution: '&copy; <a href="https://maps.google.com">Google Maps</a>'
 })
 
-const bingMaps = L.tileLayer('https://t.ssl.ak.tiles.virtualearth.net/tiles/r{q}?g=129&mkt=en-US&shading=hill&stl=H', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.bing.com/maps">Bing Maps</a>'
-});
-
 const basemaps = {
     "แผนที่ถนน OSM": osm,
     "แผนที่ถนน CartoDB": CartoDB_Positron,
     "แผนที่ถนน Google": roadMap,
-    "แผนที่จากดาวเทียม ESRI": Esri_WorldImagery,
-    "แผนที่จากดาวเทียม bingMaps": bingMaps,
-    "แผนที่จากดาวเทียม Google": satelliteMap.addTo(map),
+    "แผนที่จากดาวเทียม ESRI": Esri_WorldImagery.addTo(map),
+    "แผนที่จากดาวเทียม Google": satelliteMap,
     "แผนที่จากดาวเทียม Google-ชื่อสถานที่": hybridMap,
     "แผนที่ภูมิประเทศ Google": terrainMap,
 }
