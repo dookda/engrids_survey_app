@@ -61,13 +61,20 @@ L.control.layers(basemaps, overlay).addTo(map);
 L.geoJSON(bm_bound, {
     style: function (feature) {
         // border color only
+        // create unique color for each feature
+        var color = feature.properties.color;
         return {
-            color: "yellow",
+            color: color,
             weight: 2,
             fillOpacity: 0.0,
             dashArray: '5, 5'
-
         };
+        // return {
+        //     color: "yellow",
+        //     weight: 2,
+        //     fillOpacity: 0.0,
+        //     dashArray: '5, 5'
+        // };
     }
 }).addTo(bmbound);
 
