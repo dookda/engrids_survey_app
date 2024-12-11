@@ -44,9 +44,9 @@ const basemaps = {
     "แผนที่ถนน OSM": osm,
     "แผนที่ถนน CartoDB": CartoDB_Positron,
     "แผนที่ถนน Google": roadMap,
-    "แผนที่จากดาวเทียม ESRI": Esri_WorldImagery.addTo(map),
-    "แผนที่จากดาวเทียม Google": satelliteMap,
-    "แผนที่จากดาวเทียม Google-ชื่อสถานที่": hybridMap,
+    "แผนที่จากดาวเทียม ESRI": Esri_WorldImagery,
+    "แผนที่จากดาวเทียม Google": satelliteMap.addTo(map),
+    "แผนที่จากดาวเทียม GoogleHybrid": hybridMap,
     "แผนที่ภูมิประเทศ Google": terrainMap,
 }
 
