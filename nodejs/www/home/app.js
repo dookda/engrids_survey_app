@@ -100,6 +100,10 @@ function gotoPage(page) {
     window.location.href = "./../" + page + "/index.html";
 }
 
+// Initialize modals correctly
+const insertFormModal = new bootstrap.Modal(document.getElementById('insertFormModal'));
+const editFormModal = new bootstrap.Modal(document.getElementById('editFormModal'));
+
 // get data from server
 function getData() {
     fetch('/survey/api/getdata')
@@ -109,7 +113,19 @@ function getData() {
             markerGroup.clearLayers();
             data.data.forEach(function (item) {
                 var marker = L.marker([item.lat, item.lng], { name: "marker-green", icon: greenIcon }).addTo(markerGroup);
-                marker.bindPopup('ชื่อ: ' + item.mncptname + '<br>หมู่: ' + item.moo + '<br>บ้านเลขที่: ' + item.hno);
+                // marker.bindPopup('ชื่อ: ' + item.mncptname + '<br>หมู่: ' + item.moo + '<br>บ้านเลขที่: ' + item.hno);
+
+                marker.on('click', function (e) {
+                    console.log(item);
+                    document.getElementById('idEdit').value = item.gid;
+                    document.getElementById('mncptnameEdit').value = item.mncptname;
+                    document.getElementById('mooEdit').value = item.moo;
+                    document.getElementById('hnoEdit').value = item.hno;
+                    document.getElementById('latlngEdit').value = item.lat + ", " + item.lng;
+                    document.getElementById('latEdit').value = item.lat;
+                    document.getElementById('lngEdit').value = item.lng;
+                    editFormModal.show();
+                });
             });
         })
         .catch(error => {
@@ -126,26 +142,103 @@ function removeMarker(marker) {
     });
 }
 
-function onclick(e) {
+function insertData(data) {
+    // Send POST request
+    fetch('/survey/api/insertdata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Hide the modal on successful submission
+                insertFormModal.hide();
+                // Refresh data on the map
+                getData();
+                // Clear the form
+                document.getElementById('surveyForm').reset();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting the data.');
+        });
+}
+
+function updateData(data) {
+    // Send PUT request
+    fetch('/survey/api/update/' + data.id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Refresh data on the map
+                getData();
+                // Hide the modal on successful submission
+                editFormModal.hide();
+                // Clear the form
+                document.getElementById('surveyFormEdit').reset();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting the data.');
+        });
+}
+
+function deleteData() {
+    const id = document.getElementById('idEdit').value;
+    // Send DELETE request
+    fetch('/survey/api/delete/' + id, {
+        method: 'DELETE'
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Refresh data on the map
+                getData();
+                // Hide the modal on successful deletion
+                editFormModal.hide();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error deleting the data.');
+        });
+}
+
+// Show modal when clicking on the map or marker
+map.on("click", function (e) {
     removeMarker("marker-red");
-    L.marker(e.latlng, { name: "marker-red", icon: redIcon })
+    const marker = L.marker(e.latlng, { name: "marker-red", icon: redIcon, draggable: false })
         .addTo(map)
         .bindPopup('คุณคลิกที่พิกัด ' + e.latlng.toString());
-    // console.log(e.latlng);
-    formModal.show();
 
     document.getElementById('latlng').value = e.latlng.lat + ", " + e.latlng.lng;
     document.getElementById('lat').value = e.latlng.lat;
     document.getElementById('lng').value = e.latlng.lng;
-}
 
-// lc.start();
-map.on("click", onclick);
-getData();
+    insertFormModal.show();
+});
 
 document.getElementById('surveyForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    // Collect form data
     const formData = new FormData(event.target);
     const mncptname = formData.get('mncptname');
     const hno = formData.get('hno');
@@ -160,27 +253,37 @@ document.getElementById('surveyForm').addEventListener('submit', function (event
         lat: lat,
         lng: lng
     };
-
-    // Send POST request using fetch
-    fetch('/survey/api/insertdata', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(result => {
-            formModal.hide();
-            getData();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error submitting the data.');
-        });
+    insertData(data);
 });
 
-const formModal = new bootstrap.Modal(document.getElementById('formModal'));
+// surveyFormEdit submit event
+document.getElementById('surveyFormEdit').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Collect form data
+    const formData = new FormData(event.target);
+    const id = formData.get('idEdit');
+    const mncptname = formData.get('mncptnameEdit');
+    const hno = formData.get('hnoEdit');
+    const moo = formData.get('mooEdit');
+    const lat = formData.get('latEdit');
+    const lng = formData.get('lngEdit');
+
+    const data = {
+        id: id,
+        mncptname: mncptname,
+        moo: moo,
+        hno: hno,
+        lat: lat,
+        lng: lng
+    };
+    updateData(data);
+});
 
 
+window.onload = function () {
+    // lc.start();
+    // map.on("click", onclick);
+    getData();
+}
 

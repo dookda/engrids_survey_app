@@ -24,8 +24,9 @@ app.post('/api/insertdata', async (req, res) => {
 
         const result = await pool.query(query, values);
         res.status(201).json({
-            message: 'Data inserted successfully',
-            data: result.rows[0]
+            success: true,
+            data: result.rows[0],
+
         });
     } catch (error) {
         console.error('Error inserting data', error);
@@ -42,6 +43,7 @@ app.get('/api/getdata', async (req, res) => {
         const query = 'SELECT * FROM survey';
         const result = await pool.query(query);
         res.status(200).json({
+            success: true,
             data: result.rows
         });
     } catch (error) {
@@ -57,9 +59,15 @@ app.delete('/api/delete/:id', async (req, res) => {
     try {
         const query = 'DELETE FROM survey WHERE gid = $1';
         await pool.query(query, [id]);
-        res.status(200).json({ message: 'Row deleted successfully' });
+        res.status(200).json({
+            success: true,
+            message: 'Row deleted successfully'
+        });
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting row', error: error.message });
+        res.status(500).json({
+            message: 'Error deleting row',
+            error: error.message
+        });
     }
 });
 
@@ -74,7 +82,10 @@ app.put('/api/update/:id', async (req, res) => {
         console.log(query);
 
         await pool.query(query, [mncptname, moo, hno, lat, lng, id]);
-        res.status(200).json({ message: 'Row updated successfully' });
+        res.status(200).json({
+            success: true,
+            message: 'Row updated successfully'
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating row', error: error.message });
     }

@@ -108,12 +108,12 @@
     </div>
 
 
-    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="insertFormModal" tabindex="-1" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">บันทึกข้อมูล</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
 
                 <form class="form form-vertical" id="surveyForm">
@@ -167,7 +167,75 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <button type="button" class="btn btn-light" onclick="removeMarker('marker-red')"
+                            data-bs-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">บันทึกข้อมูล</h1>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+
+                <form class="form form-vertical" id="surveyFormEdit">
+                    <div class="modal-body">
+                        <div class="form-body">
+                            <div class="row">
+                                <input type="hidden" id="idEdit" name="idEdit">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-vertical">เทศบาล</label>
+                                        <select class="form-select" id="mncptnameEdit" name="mncptnameEdit">
+                                            <option value="ทต.เวียงยอง">ทต.เวียงยอง</option>
+                                            <option value="ทต.ศรีบัวบาน" selected>ทต.ศรีบัวบาน</option>
+                                            <option value="ทต.บ้านแป้น">ทต.บ้านแป้น</option>
+                                            <option value="ทต.ต้นธง">ทต.ต้นธง</option>
+                                            <option value="ทต.หนองหนาม">ทต.หนองหนาม</option>
+                                            <option value="ทต.เหมืองจี้">ทต.เหมืองจี้</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="email-id-vertical">บ้านเลขที่</label>
+                                        <input type="text" id="hnoEdit" name="hnoEdit" class="form-control"
+                                            placeholder="บ้านเลขที่" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="email-id-vertical">หมู่ที่</label>
+                                        <input type="number" id="mooEdit" name="mooEdit" class="form-control"
+                                            placeholder="หมู่ที่" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="contact-info-vertical">พิกัด</label>
+                                        <input type="text" id="latlngEdit" class="form-control"
+                                            placeholder="คลิ๊กลงบนแผนที่" required>
+                                    </div>
+                                    <input type="hidden" id="latEdit" name="latEdit">
+                                    <input type="hidden" id="lngEdit" name="lngEdit">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" onclick="removeMarker('marker-red')"
+                            data-bs-dismiss="modal">ยกเลิก</button>
+                        <!-- delete -->
+                        <button type="button" class="btn btn-danger" onclick="deleteData()">ลบ</button>
                         <button type="submit" class="btn btn-primary">บันทึก</button>
                     </div>
                 </form>
