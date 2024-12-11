@@ -65,9 +65,9 @@ L.geoJSON(bm_bound, {
         var color = feature.properties.color;
         return {
             color: color,
-            weight: 2,
+            weight: 3,
             fillOpacity: 0.0,
-            dashArray: '5, 5'
+            dashArray: '5, 4'
         };
         // return {
         //     color: "yellow",
