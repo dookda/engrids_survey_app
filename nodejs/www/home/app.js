@@ -1,7 +1,7 @@
 var map = L.map('map').setView([18.551570505767558, 99.0703012946973], 15);
 
 const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 24,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
@@ -12,30 +12,31 @@ const Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/re
 const CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
-    maxZoom: 20
+    maxZoom: 24
 });
 
 const Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 24,
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 });
 
 const roadMap = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
+    maxZoom: 24,
     attribution: '&copy; <a href="https://maps.google.com">Google Maps</a>'
 });
 
 const satelliteMap = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
+    maxZoom: 24,
     attribution: '&copy; <a href="https://maps.google.com">Google Maps</a>'
 });
 
 const terrainMap = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
+    maxZoom: 24,
     attribution: '&copy; <a href="https://maps.google.com">Google Maps</a>'
 });
 
 const hybridMap = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-    maxZoom: 20,
+    maxZoom: 24,
     attribution: '&copy; <a href="https://maps.google.com">Google Maps</a>'
 })
 
