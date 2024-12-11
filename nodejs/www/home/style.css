@@ -1,9 +1,13 @@
 body {
-    padding-top: 12vh;
+    /* padding-top: 12vh; */
 
     font-family: "Noto Sans Thai", serif;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+.mt-10 {
+    margin-top: 9vh;
 }
 
 #map {
