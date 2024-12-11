@@ -103,7 +103,12 @@ function gotoPage(page) {
 // Initialize modals correctly
 const insertFormModal = new bootstrap.Modal(document.getElementById('insertFormModal'));
 const editFormModal = new bootstrap.Modal(document.getElementById('editFormModal'));
+const toast = new bootstrap.Toast(document.getElementById('liveToast'), {
+    autohide: true,
+    delay: 2000
+});
 
+// toast.show();
 // get data from server
 function getData() {
     fetch('/survey/api/getdata')
@@ -155,6 +160,8 @@ function insertData(data) {
         .then(result => {
             if (result.success) {
                 // Hide the modal on successful submission
+                document.getElementById('toastMessage').innerText = 'เพิ่มข้อมูลเรียบร้อย';
+                toast.show();
                 insertFormModal.hide();
                 // Refresh data on the map
                 getData();
@@ -185,6 +192,8 @@ function updateData(data) {
                 // Refresh data on the map
                 getData();
                 // Hide the modal on successful submission
+                document.getElementById('toastMessage').innerText = 'บันทึกข้อมูลเรียบร้อย';
+                toast.show();
                 editFormModal.hide();
                 // Clear the form
                 document.getElementById('surveyFormEdit').reset();
@@ -210,6 +219,8 @@ function deleteData() {
                 // Refresh data on the map
                 getData();
                 // Hide the modal on successful deletion
+                document.getElementById('toastMessage').innerText = 'ลบข้อมูลเรียบร้อย';
+                toast.show();
                 editFormModal.hide();
             } else {
                 alert('Error: ' + result.message);

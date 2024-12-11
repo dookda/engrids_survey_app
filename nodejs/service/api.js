@@ -79,7 +79,7 @@ app.put('/api/update/:id', async (req, res) => {
         const query = `UPDATE survey 
             SET mncptname = $1, moo = $2, hno = $3, lat = $4, lng = $5 
             WHERE gid = $6`;
-        console.log(query);
+        // console.log(query);
 
         await pool.query(query, [mncptname, moo, hno, lat, lng, id]);
         res.status(200).json({
