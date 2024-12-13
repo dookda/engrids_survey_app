@@ -52,9 +52,11 @@ const basemaps = {
 
 var markerGroup = L.layerGroup().addTo(map);
 var bmbound = L.layerGroup().addTo(map);
+var bmmoobound = L.layerGroup().addTo(map);
 const overlay = {
     "ตำแหน่งบ้าน": markerGroup.addTo(map),
-    "ขอบเขตหมู่บ้าน": bmbound.addTo(map)
+    "โซนปักหมุด": bmbound.addTo(map),
+    "ขอบเขตหมู่บ้าน": bmmoobound.addTo(map)
 }
 L.control.layers(basemaps, overlay).addTo(map);
 
@@ -77,6 +79,26 @@ L.geoJSON(bm_bound, {
         // };
     }
 }).addTo(bmbound);
+
+L.geoJSON(bm_moo_bound, {
+    style: function (feature) {
+        // border color only
+        // create unique color for each feature
+        var color = feature.properties.color;
+        return {
+            color: color,
+            weight: 3,
+            fillOpacity: 0.0,
+            dashArray: '5, 4'
+        };
+        // return {
+        //     color: "yellow",
+        //     weight: 2,
+        //     fillOpacity: 0.0,
+        //     dashArray: '5, 5'
+        // };
+    }
+}).addTo(bmmoobound);
 
 var lc = L.control.locate({
     locateOptions: {
